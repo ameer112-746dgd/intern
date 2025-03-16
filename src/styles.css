@@ -123,3 +123,24 @@
     padding: 24px;
   }
   
+  .interview-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .interview-form input,
+  .interview-form textarea,
+  .interview-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  

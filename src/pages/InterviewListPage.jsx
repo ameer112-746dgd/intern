@@ -1,18 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../components/ui/card";
 import Button from "../components/ui/button";
 
-
-const mockInterviews = [
-  { id: 1, title: "Frontend Interview", status: "Pending", date: "2025-03-10" },
-  { id: 2, title: "Backend Interview", status: "Completed", date: "2025-03-08" },
-];
-
 const InterviewListPage = () => {
+  const navigate = useNavigate();
+  const [interviews, setInterviews] = useState([]);
+
+
+  useEffect(() => {
+    const fetchInterviews = () => {
+      const savedInterviews = JSON.parse(localStorage.getItem("interviews")) || [];
+      setInterviews(savedInterviews);
+    };
+
+    fetchInterviews();
+
+    const handleStorageChange = () => fetchInterviews();
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const handleCreateInterview = () => {
+    navigate("/create-interview");
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>Interview List</h2>
-      <Button style={{ marginBottom: "20px" }}>Create Interview</Button>
+      <Button style={{ marginBottom: "20px" }} onClick={handleCreateInterview}>
+        Create Interview
+      </Button>
       <Card>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
@@ -23,13 +44,21 @@ const InterviewListPage = () => {
             </tr>
           </thead>
           <tbody>
-            {mockInterviews.map((interview) => (
-              <tr key={interview.id}>
-                <td style={{ padding: "8px" }}>{interview.title}</td>
-                <td style={{ padding: "8px" }}>{interview.status}</td>
-                <td style={{ padding: "8px" }}>{interview.date}</td>
+            {interviews.length > 0 ? (
+              interviews.map((interview) => (
+                <tr key={interview.id}>
+                  <td style={{ padding: "8px" }}>{interview.title}</td>
+                  <td style={{ padding: "8px" }}>{interview.status}</td>
+                  <td style={{ padding: "8px" }}>{interview.date}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" style={{ textAlign: "center", padding: "8px" }}>
+                  No interviews found.
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </Card>

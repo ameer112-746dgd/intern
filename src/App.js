@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
 import InterviewListPage from "./pages/InterviewListPage";
+import CreateInterviewPage from "./pages/CreateInterviewPage.jsx";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import "./styles.css";
@@ -23,6 +24,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<DashboardPage />} />
               <Route path="/interviews" element={<InterviewListPage />} />
+              <Route path="/create-interview" element={<CreateInterviewPage />} />
             </Routes>
           </div>
         </div>
