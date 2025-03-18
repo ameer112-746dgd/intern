@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../components/ui/card";
 import Button from "../components/ui/button";
 
+
 const InterviewListPage = () => {
   const navigate = useNavigate();
   const [interviews, setInterviews] = useState([]);
@@ -34,6 +35,7 @@ const InterviewListPage = () => {
       <Button style={{ marginBottom: "20px" }} onClick={handleCreateInterview}>
         Create Interview
       </Button>
+      <button onClick={() => navigate("/candidate-interview")}>Start Interview</button>
       <Card>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>

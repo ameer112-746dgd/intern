@@ -5,6 +5,7 @@ import InterviewListPage from "./pages/InterviewListPage";
 import CreateInterviewPage from "./pages/CreateInterviewPage.jsx";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import CandidateInterviewPage from "./components/CandidateInterviewPage";
 import "./styles.css";
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
               <Route path="/" element={<DashboardPage />} />
               <Route path="/interviews" element={<InterviewListPage />} />
               <Route path="/create-interview" element={<CreateInterviewPage />} />
+              <Route path="/candidate-interview" element={<CandidateInterviewPage />} />
             </Routes>
           </div>
         </div>
