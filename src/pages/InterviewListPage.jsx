@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "../components/ui/card";
 import Button from "../components/ui/button";
-
+import "../styles.css";
 
 const InterviewListPage = () => {
   const navigate = useNavigate();
   const [interviews, setInterviews] = useState([]);
-
 
   useEffect(() => {
     const fetchInterviews = () => {
@@ -19,7 +18,7 @@ const InterviewListPage = () => {
 
     const handleStorageChange = () => fetchInterviews();
     window.addEventListener("storage", handleStorageChange);
-    
+
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
@@ -30,35 +29,35 @@ const InterviewListPage = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Interview List</h2>
-      <Button style={{ marginBottom: "20px" }} onClick={handleCreateInterview}>
-        Create Interview
-      </Button>
-      <button onClick={() => navigate("/candidate-interview")}>Start Interview</button>
+    <div className="interview-list-container">
+      <h2 className="page-title">Interview List</h2>
+      <div className="button-group">
+        <Button onClick={handleCreateInterview}>Create Interview</Button>
+        <button className="start-button" onClick={() => navigate("/candidate-interview")}>
+          Start Interview
+        </button>
+      </div>
       <Card>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <table className="interview-table">
           <thead>
             <tr>
-              <th style={{ textAlign: "left", padding: "8px" }}>Title</th>
-              <th style={{ textAlign: "left", padding: "8px" }}>Status</th>
-              <th style={{ textAlign: "left", padding: "8px" }}>Date Created</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Date Created</th>
             </tr>
           </thead>
           <tbody>
             {interviews.length > 0 ? (
               interviews.map((interview) => (
                 <tr key={interview.id}>
-                  <td style={{ padding: "8px" }}>{interview.title}</td>
-                  <td style={{ padding: "8px" }}>{interview.status}</td>
-                  <td style={{ padding: "8px" }}>{interview.date}</td>
+                  <td>{interview.title}</td>
+                  <td>{interview.status}</td>
+                  <td>{interview.date}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="3" style={{ textAlign: "center", padding: "8px" }}>
-                  No interviews found.
-                </td>
+                <td colSpan="3" className="no-data">No interviews found.</td>
               </tr>
             )}
           </tbody>
